@@ -1,6 +1,6 @@
 {
   "name": "coc-autoxjs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "coc.nvim extension for AutoX.js",
   "main": "lib/index.js",
   "repository": {
@@ -33,6 +33,12 @@
     "onCommand:autoxjs.saveProject"
   ],
   "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/autoxjs.json"
+      }
+    ],
     "configuration": {
       "type": "object",
       "properties": {
