@@ -6,15 +6,11 @@ import * as url from 'url'
 import * as fs from 'fs'
 import { Project, ProjectObserser } from './project'
 import os from 'os'
-import { OutputChannel, window, } from 'coc.nvim'
+import { OutputChannel } from 'coc.nvim'
 import { logger } from './logger'
 
-const DEBUG = false
-
 function logDebug(message?: any, ...optionalParams: any[]) {
-  if (DEBUG) {
-    logger.log(`${message}: ${JSON.stringify(optionalParams, null, 2)}`)
-  }
+  logger.log(`${message}: ${JSON.stringify(optionalParams, null, 2)}`)
 }
 
 const HANDSHAKE_TIMEOUT = 10 * 1000
@@ -156,11 +152,11 @@ export class AutoJsDebugServer extends EventEmitter {
         this.attachDevice(device)
         this.emit('new_device', device)
 
-        const logChannel = this.newLogChannel(device)
-        logChannel.appendLine(`设备已连接：${device}`)
+        logDebug(`设备已连接：${device}`)
       })
     })
   }
+
   openConnection(request: ws.request): ws.connection {
     return request.accept()
   }
@@ -275,17 +271,17 @@ export class AutoJsDebugServer extends EventEmitter {
   }
 
   /** 创建设备日志打印通道 */
-  private newLogChannel(device: Device): OutputChannel {
-    const channelName = `${device}`
-    let logChannel = this.logChannels.get(channelName)
-    if (!logChannel) {
-      logChannel = window.createOutputChannel(channelName)
-      this.logChannels.set(channelName, logChannel)
-    }
-    logChannel.show(true)
-    // console.log("创建日志通道" + channelName)
-    return logChannel
-  }
+  // private newLogChannel(device: Device): OutputChannel {
+  //   const channelName = `${device}`
+  //   let logChannel = this.logChannels.get(channelName)
+  //   if (!logChannel) {
+  //     logChannel = window.createOutputChannel(channelName)
+  //     this.logChannels.set(channelName, logChannel)
+  //   }
+  //   logChannel.show(true)
+  //   // console.log("创建日志通道" + channelName)
+  //   return logChannel
+  // }
 
   /** 获取设备日志打印通道 */
   private getLogChannel(device: Device): OutputChannel {
