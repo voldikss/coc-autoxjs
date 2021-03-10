@@ -339,7 +339,7 @@ export function activate(context: ExtensionContext) {
     // eslint-disable-next-line @typescript-eslint/ban-types
     const action: Function = extension[command]
     context.subscriptions.push(
-      commands.registerCommand('extension.' + command, action.bind(extension))
+      commands.registerCommand('autoxjs.' + command, action.bind(extension))
     )
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // _context = context
