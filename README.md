@@ -23,3 +23,9 @@
 - `:CocCommand autoxjs.saveToDevice,`
 - `:CocCommand autoxjs.runProject,`
 - `:CocCommand autoxjs.saveProject`
+
+## Configurations
+
+- `autoxjs.trace`
+
+  Default: `false`

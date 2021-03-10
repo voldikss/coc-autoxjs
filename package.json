@@ -1,6 +1,6 @@
 {
   "name": "coc-autoxjs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "coc.nvim extension for AutoX.js",
   "main": "lib/index.js",
   "repository": {
@@ -35,7 +35,12 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "autoxjs.trace": {
+          "type": "boolean",
+          "default": false
+        }
+      }
     },
     "commands": [
       {

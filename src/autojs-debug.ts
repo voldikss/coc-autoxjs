@@ -278,8 +278,8 @@ export class AutoJsDebugServer extends EventEmitter {
       logChannel = window.createOutputChannel(channelName)
       this.logChannels.set(channelName, logChannel)
     }
-    logChannel.show(true)
-    // console.log("创建日志通道" + channelName)
+    // logChannel.show(false)
+    logDebug("创建日志通道" + channelName)
     return logChannel
   }
 
