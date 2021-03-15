@@ -198,10 +198,11 @@ class Extension {
     })
   }
 
-  runOnDevice() {
-    this.selectDevice((device) => this.runOn(device))
+  async runOnDevice() {
+    await this.selectDevice(async (device) => await this.runOn(device))
   }
-  selectDevice(callback) {
+
+  async selectDevice(callback) {
     let devices: Array<Device> = server.devices
     if (recentDevice) {
       const i = devices.indexOf(recentDevice)
@@ -213,7 +214,8 @@ class Extension {
     }
     const names = devices.map((device) => device.toString())
     window.showQuickpick(names).then((select) => {
-      const device = devices[names.indexOf(select.toString())]
+      if (select == -1) return
+      const device = devices[select]
       recentDevice = device
       callback(device)
     })
@@ -230,18 +232,18 @@ class Extension {
     }
   }
 
-  save(url?) {
-    this.saveTo(server, url)
+  async save(url?) {
+    await this.saveTo(server, url)
   }
-  saveToDevice() {
-    this.selectDevice((device) => this.saveTo(device))
+  async saveToDevice() {
+    await this.selectDevice(async (device) => await this.saveTo(device))
   }
 
   async saveTo(target: AutoJsDebugServer | Device, url?) {
     console.log('url-->', url)
     let text = ''
     const fileName = ''
-    if (null == url) {
+    if (url != null) {
       const uri = Uri.parse(url)
       const fileName = uri.fsPath
       console.log('fileName-->', fileName)
@@ -333,7 +335,7 @@ const extCmds = [
 ]
 const extension = new Extension()
 
-export function activate(context: ExtensionContext) {
+export async function activate(context: ExtensionContext) {
   console.log('extension "auto-js-vscodeext-fixed" is now active.')
   extCmds.forEach((command) => {
     // eslint-disable-next-line @typescript-eslint/ban-types

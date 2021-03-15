@@ -1,6 +1,6 @@
 {
   "name": "coc-autoxjs",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "coc.nvim extension for AutoX.js",
   "main": "lib/index.js",
   "repository": {
